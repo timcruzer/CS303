@@ -1,1 +1,108 @@
+//Tim Cruz
+//tcc3t7@umsystem.edu
+//CS303
+//Assignment 1
+//2/13/2023
+#include "function.h"
+
+int main()
+{
+
+	int *currentArray = new int[1];
+	int arrSize = 0;
+
+ifstream inFile;
+inFile.open("input.txt");
+  
+		readFile(inFile, currentArray, arrSize);
+
+		char c = 'x';
+		while (c != '0')
+		{
+			c = printMenu();
+			switch (c) {
+        
+			case '1':
+				//find the index
+				try {
+					int num;
+					cout << "Enter value: ";
+					cin >> num;
+					cout << endl;
+					int index = searchIndex(currentArray, num, arrSize);
+					if (index == -1)
+					{
+						cout << "Value not found" << endl << endl;
+					}
+					else cout << "Value found at index: " << index << endl << endl;
+				}
+				catch (exception& e)
+				{
+					cerr << e.what() << endl;
+				}
+        printArray(currentArray, arrSize);
+				break;
+
+			case '2':
+				//change the value
+				try {
+					int index;
+					cout << "Enter value: ";
+					cin >> index;
+					cout << endl;
+					if (index < 0 || index > arrSize)
+					{
+						cout<<"Please enter a valid number";
+					}
+					changeNumber(currentArray, index, arrSize);
+				}
+				catch (exception& e)
+				{
+					cerr << e.what() << endl;
+				}
+        printArray(currentArray, arrSize);
+				break;
+
+			case '3':
+				//append to array
+				try {
+					int num;
+					cout << "Enter value: ";
+					cin >> num;
+					cout << endl;
+					addArray(currentArray, num, arrSize);
+				}
+				catch (exception& e)
+				{
+					cerr << "Not a valid input!" << endl;
+				}
+        printArray(currentArray, arrSize);
+				break;
+
+			case '4':
+				//delete number of an index
+				try {
+					int index;
+					cout << "Enter index: ";
+					cin >> index;
+					cout << endl;
+					if (index < 0 || index > arrSize)
+					{
+						cout<<"Please enter a valid number";
+					}
+					deleteNumber(currentArray, index, arrSize);
+				}
+				catch (exception& e)
+				{
+					cerr << e.what() << endl;
+				}
+        printArray(currentArray, arrSize);
+				break;
+
+			default:
+				break;
+			}
+		}
+		inFile.close();
+  }
 
